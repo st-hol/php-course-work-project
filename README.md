@@ -3,7 +3,7 @@
 
   a) Description of the project:
   
-      Varian №6 - System «Introductory Campaign»:
+      System «Introductory Campaign»:
       The student registers for the exams.
       The administrator sets grades for items. 
       The student chooses a specialty at the university. 
