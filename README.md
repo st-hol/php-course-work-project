@@ -1,0 +1,19 @@
+# IntroductoryCampaign
+
+
+  a) Description of the project:
+  
+      Varian №6 - System «Introductory Campaign»:
+      The student registers for the exams.
+      The administrator sets grades for items. 
+      The student chooses a specialty at the university. 
+      Formed rating lists of applicants, students receive a notice of admission.
+      
+  
+  b) Technologies used:
+  
+      In this course work was implemented my own simple mvc framework, ORM, template-preprocessor and middleware. 
+      SQL Triggers was used to provide interanal "system" logic.
+      
+
+*note* db dump is in "__" folder.
