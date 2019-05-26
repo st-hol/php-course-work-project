@@ -28,14 +28,14 @@ class TemplateEngine
         //todo: fix warning --- filemtime()
         $isNewer = filemtime($parsed_filename) > filemtime($source_filename);
         if (file_exists($parsed_filename) and $isNewer) {
-            echo "\n<br><i style='color: coral;'>//templator log: The newest version of file was obtained from CACHE</i><br>\n";
+         //   echo "\n<br><i style='color: coral;'>//templator log: The newest version of file was obtained from CACHE</i><br>\n";
             extract($data_arr, EXTR_SKIP);
             ob_start();
             require "$parsed_filename";
             return ob_get_clean();
         }
         if (file_exists($source_filename)) {
-            echo "\n<br><i style='color: coral;'>//templator log: The file was PARSED and now you see it</i><br>\n";
+         //   echo "\n<br><i style='color: coral;'>//templator log: The file was PARSED and now you see it</i><br>\n";
             $blade_code = file_get_contents($source_filename);
             $parsed = $this->parse_blade($blade_code);
             $this->record_pure_php_to_cache_folder($template_name, $parsed);
@@ -59,6 +59,7 @@ class TemplateEngine
         $php = str_replace("{{", " <?php ", $blade_code);
         $php = str_replace("}}", " ?> ", $php);
         $php = str_replace(">>>", " echo ", $php);
+        $php = str_replace("<<<", " require_once ", $php);
         $php = str_replace("[[", " foreach ", $php);
         $php = str_replace("]]", " endforeach; ", $php);
         $php = str_replace("^^", " htmlentities", $php);

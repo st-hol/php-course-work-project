@@ -79,7 +79,7 @@ class DBHandler
      */
     public static function execute_query($dbh, $sql_query, $debug_mode_on = false)
     {
-        echo "<br>\nYour SQL:\n    " . $sql_query;
+      //  echo "<br>\nYour SQL:\n    " . $sql_query;
 
         $stmt = $dbh->prepare($sql_query);
         $stmt->execute();

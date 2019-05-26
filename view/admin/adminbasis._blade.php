@@ -23,8 +23,12 @@
 
 {{ >>> $sidebar;}}
 
-{{ >>> $default_content;}}
 
+<div class="personal-cabinet-wrapper">
+    <div class="welcome-title-div">
+        <span class="welcome-title">Привіт {{ >>> $user->email; }} !</span>
+    </div>
+</div>
 
 
 

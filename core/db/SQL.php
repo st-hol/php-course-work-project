@@ -101,7 +101,7 @@ class SQL
 
 
         //turn on/off debug_mode to see sql
-        $stmt = DBHandler::execute_query($dbh, $sql_query, $debug_mode_on = true);
+        $stmt = DBHandler::execute_query($dbh, $sql_query, $debug_mode_on = false);
         return $stmt;
     }
 

@@ -76,11 +76,11 @@ class Route
 
                 if (method_exists($controllerObj, $action)) {
 
-                    echo "<p style='color: darkblue'><br>trying to execute <strong>$action</strong>" .
-                        " of <strong>$controller</strong></p>";
+//                    echo "<p style='color: darkblue'><br>trying to execute <strong>$action</strong>" .
+//                        " of <strong>$controller</strong></p>";
 
                     call_user_func_array([$controllerObj, $action], $matcher_response['var_param']);
-                    echo "<br><p style='color: green'>executed</p>";
+                   // echo "<br><p style='color: green'>executed</p>";
 
                 } else {
                     echo "<p style='color: orangered'>method <strong>$action</strong>" .
@@ -102,7 +102,7 @@ class Route
     {
         $url_is_equal = false;
 
-        echo "<span style='color: seagreen;'>used method: </span>" . self::getMethod() . "\n<br>";
+        //echo "<span style='color: seagreen;'>used method: </span>" . self::getMethod() . "\n<br>";
 
         //1.check method
         if (self::getMethod() == "POST") {
@@ -112,8 +112,8 @@ class Route
             $incoming_url_query_parts = explode('/', $url);
             $appropriate_routes = self::$routes;
         }
-        echo "<p style='color: blueviolet'> URL PARTS: </p>";
-        debug($incoming_url_query_parts);
+//        echo "<p style='color: blueviolet'> URL PARTS: </p>";
+//        debug($incoming_url_query_parts);
 
         foreach ($appropriate_routes as $pattern => $route) {
             $noted_url_query_parts = explode('/', $pattern); //example: "posts/add" --- [posts, add]
@@ -147,9 +147,9 @@ class Route
                 }
             }
             if ($url_is_equal) {
-                ECHO "<BR><p style='color: crimson'>THE MATCHED ROUTE IS :</p>";
-                debug(self::$route);
-                ECHO "<br>";
+//                ECHO "<BR><p style='color: crimson'>THE MATCHED ROUTE IS :</p>";
+//                debug(self::$route);
+//                ECHO "<br>";
                 return ['is_matched' => true, 'var_param' => $var_param]; //if matched - return true, param - array
             }
         }

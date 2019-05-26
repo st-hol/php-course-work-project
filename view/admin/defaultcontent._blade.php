@@ -1,6 +1,6 @@
-<div class="personal-cabinet-wrapper">
+<div class="personal-cabinet-wrapper" style="background: #00bcd4">
     <div class="welcome-title-div">
-        <span class="welcome-title">Привіт {{ >>> $user->email ;}} !</span>
+        <span class="welcome-title">Привіт {{ >>> $user->email; }} !</span>
     </div>
 </div>
 

@@ -53,13 +53,13 @@ class CommonController extends Controller
         if ($role == "ADMIN"){
             $sidebar = $this->templator->output( "admin/sidebar", []);
             $navbar = $this->templator->output( "admin/navbar", []);
-            $default_content = $this->templator->output( "admin/default-content", ["user"=>$user]);
-            $html = $this->templator->output( "admin/adminbasis", ["sidebar"=>$sidebar, "navbar"=>$navbar, "default_content=>$default_content"]);
+            //$defaultcontent = $this->templator->output( "admin/defaultcontent", ["user"=>$user]);
+            $html = $this->templator->output( "admin/adminbasis", ["sidebar"=>$sidebar, "navbar"=>$navbar, "user"=>$user]);
         }elseif ($role == "STUDENT"){
             $sidebar = $this->templator->output( "user/sidebar", []);
             $navbar = $this->templator->output( "user/navbar", []);
-            $default_content = $this->templator->output( "user/default-content", ["user"=>$user]);
-            $html = $this->templator->output( "user/userbasis", ["sidebar"=>$sidebar, "navbar"=>$navbar, "default_content=>$default_content"]);
+            //$defaultcontent = $this->templator->output( "user/defaultcontent", ["user"=>$user]);
+            $html = $this->templator->output( "user/userbasis", ["sidebar"=>$sidebar, "navbar"=>$navbar, "user"=>$user]);
         }else{
             $this->home();
         }

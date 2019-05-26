@@ -23,7 +23,14 @@
 
  <?php   echo  $sidebar; ?> 
 
- <?php   echo  $default_content; ?> 
+
+<div class="personal-cabinet-wrapper">
+    <div class="welcome-title-div">
+        <span class="welcome-title">Привіт  <?php   echo  $user->email;  ?>  !</span>
+    </div>
+</div>
+
+
 
 
 <!-- SCRIPTS -->

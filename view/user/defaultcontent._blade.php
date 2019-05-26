@@ -1,5 +1,5 @@
 
-<div class="welcome-title-div">
+<div class="welcome-title-div" style="background: #00bcd4">
     <span class="welcome-title">Привіт {{ >>>  $user->email; }} !</span>
 </div>
 
