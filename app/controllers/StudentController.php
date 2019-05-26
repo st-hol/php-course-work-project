@@ -9,6 +9,7 @@
 
 require_once __DIR__ . "/../mail/EmailSender.php";
 require_once "Controller.php";
+require_once "ErrorController.php";
 require_once "CommonController.php";
 require_once __DIR__ . "/../middleware/StudentRightsMiddleware.php";
 
@@ -49,8 +50,8 @@ class StudentController extends Controller
             $html = $this->templator->output("user/applyforadmission", ["specialities" => $specialities, "sidebar" => $sidebar, "navbar" => $navbar]);
             $this->templator->showPage($html);
         } else {
-            $dir = new CommonController();
-            $dir->home();
+            $dir = new ErrorController();
+            $dir->error403forbidden();
         }
     }
 
@@ -102,8 +103,8 @@ class StudentController extends Controller
             $html = $this->templator->output("user/regforexam", ["exams" => $exams, "sidebar" => $sidebar, "navbar" => $navbar]);
             $this->templator->showPage($html);
         } else {
-            $dir = new CommonController();
-            $dir->home();
+            $dir = new ErrorController();
+            $dir->error403forbidden();
         }
     }
 

@@ -9,6 +9,7 @@
 
 require_once "Controller.php";
 require_once "CommonController.php";
+require_once "ErrorController.php";
 require_once __DIR__ . "/../middleware/AdminRightsMiddleware.php";
 require_once __DIR__ . "/../validators/UserValidator.php";
 
@@ -30,8 +31,8 @@ class CmsController extends Controller
             $html = $this->templator->output("cms/edit_users", ["students" => $students]);
             $this->templator->showPage($html);
         } else {
-            $dir = new CommonController();
-            $dir->home();
+            $dir = new ErrorController();
+            $dir->error403forbidden();
         }
     }
 
@@ -66,8 +67,8 @@ class CmsController extends Controller
             echo "<br><script>alert('deleted.');</script>";
             $this->editUsers();
         } else {
-            $dir = new CommonController();
-            $dir->home();
+            $dir = new ErrorController();
+            $dir->error403forbidden();
         }
     }
 
@@ -83,8 +84,8 @@ class CmsController extends Controller
             $html = $this->templator->output("cms/edit_exams", ["exams" => $exams]);
             $this->templator->showPage($html);
         } else {
-            $dir = new CommonController();
-            $dir->home();
+            $dir = new ErrorController();
+            $dir->error403forbidden();
         }
     }
 
@@ -113,8 +114,8 @@ class CmsController extends Controller
             echo "<br><script>alert('deleted.');</script>";
             $this->editExams();
         } else {
-            $dir = new CommonController();
-            $dir->home();
+            $dir = new ErrorController();
+            $dir->error403forbidden();
         }
     }
 
@@ -130,8 +131,8 @@ class CmsController extends Controller
             $html = $this->templator->output("cms/edit_specialities", ["specialities" => $specialities]);
             $this->templator->showPage($html);
         } else {
-            $dir = new CommonController();
-            $dir->home();
+            $dir = new ErrorController();
+            $dir->error403forbidden();
         }
     }
 
@@ -161,8 +162,8 @@ class CmsController extends Controller
             echo "<br><script>alert('deleted.');</script>";
             $this->editSpecialities();
         } else {
-            $dir = new CommonController();
-            $dir->home();
+            $dir = new ErrorController();
+            $dir->error403forbidden();
         }
     }
 

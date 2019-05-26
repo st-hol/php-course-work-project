@@ -92,7 +92,7 @@ class Route
             }
             //debug(Route::getRoute());
         } else {
-            require __DIR__ . "/../view/error/404.php";
+            require __DIR__ . "/../view/error/404._blade.php";
             http_response_code(404);
         }
     }

@@ -9,6 +9,7 @@
 require_once __DIR__ . "/../../core/Route.php";
 
 
+
 //directions
 Route::add('', 'CommonController@home');
 Route::add("home", 'CommonController@home');
@@ -21,16 +22,26 @@ Route::add("reg-exam", 'StudentController@makeRegForExam');
 Route::add("apply-admission", 'StudentController@makeApplyForAdmission');
 Route::add("rate", 'AdminController@makeRate');
 
+
 //actions
 Route::addPost("submit-reg-exam/{exam}", 'StudentController@submitRegForExam');
 Route::addPost("submit-apply-admission/{speciality}", 'StudentController@submitApplyForAdmission');
 Route::addPost("put-rate-action/{student}/{exam}/{rate}", 'AdminController@submitRate');
 
 
+
 //account
 Route::addPost('login-action/{email}/{password}', 'AccountController@login');
 Route::addPost('registration-action/{email}/{password}/{role}/{name}/{surname}','AccountController@register');
 Route::add('logout', "AccountController@logout");
+
+
+
+//errors
+Route::add('403', "ErrorController@error403forbidden");
+Route::add('404', "ErrorController@error404notfound");
+
+
 
 //cms
 //user-edit

@@ -9,6 +9,7 @@
 
 require_once "Controller.php";
 require_once "CommonController.php";
+require_once "ErrorController.php";
 require_once __DIR__ . "/../middleware/AdminRightsMiddleware.php";
 require_once __DIR__ . "/../validators/NumberValidator.php";
 
@@ -35,8 +36,8 @@ class AdminController extends Controller
             $html = $this->templator->output( "admin/putmarks", ["students"=>$students, "exams"=>$exams, "sidebar"=>$sidebar, "navbar"=>$navbar]);
             $this->templator->showPage($html);
         } else {
-            $dir = new CommonController();
-            $dir->home();
+            $dir = new ErrorController();
+            $dir->error403forbidden();
         }
     }
 
