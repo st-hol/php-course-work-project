@@ -7,6 +7,7 @@
  */
 
 
+require_once __DIR__ . "/../mail/EmailSender.php";
 require_once "Controller.php";
 require_once "CommonController.php";
 require_once __DIR__ . "/../middleware/StudentRightsMiddleware.php";
@@ -53,23 +54,38 @@ class StudentController extends Controller
         }
     }
 
-//todo notify
-//todo 3exams need
+
     public function submitApplyForAdmission()
     {
-
         session_start();
         $user = $_SESSION['user'];
 
-        //record creation.
-        $app = new ApplicationForAdmission("application_for_admission");
-        $app->id_student = $user->id_student;
-        $app->id_speciality = $_POST['idSpeciality'];
-        $app->save(["id_student" => $user->id_student]);
+        $examOrm = new ExamRegistration("exams");
+        $all_exams_quantity = $examOrm->select("count(*) as cnt")->get()[0]->cnt;
+        $examOrm = new ExamRegistration("students_has_exams");
+        $student_exams_quantity = $examOrm->select("count(*) as cnt")->where("id_student", "=", $user->id_student)->get()[0]->cnt;
 
-        echo "<br><script>alert('success!');</script>";
+        if ($all_exams_quantity == $student_exams_quantity) {
+
+            //record creation.
+            $app = new ApplicationForAdmission("application_for_admission");
+            $app->id_student = $user->id_student;
+            $app->id_speciality = $_POST['idSpeciality'];
+            $app->save(["id_student" => $user->id_student]);
+
+
+            $enrolled = $app->select()->where("id_student","=", $user->id_student)->get()[0]->is_enrolled;
+            $enrolled = $enrolled == 1 ? true : false;
+
+            //send email
+            $notifier = new EmailSender();
+            $notifier->notifyStudentByEmail($enrolled, $user->email);
+
+            echo "<br><script>alert('successful apply!');</script>";
+        } else {
+            echo "<br><script>alert('you should pass all exams before apply!');</script>";
+        }
         $this->makeApplyForAdmission();
-        //header( 'Location: /php_course_work_project/apply-admission', true, 303 );
     }
 
     public function makeRegForExam()
@@ -108,9 +124,6 @@ class StudentController extends Controller
     }
 
 }
-
-
-
 
 
 
