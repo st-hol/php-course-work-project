@@ -35,8 +35,7 @@ class CommonController extends Controller
             $navbar = $this->templator->output( "guest/navbar", []);
         }
 
-        $specialitiesOrm = new Speciality("specialities");
-        $specialities = $specialitiesOrm->select()->get();
+        $specialities = Speciality::getAllSpecialities();
 
         $landing = $this->templator->output( "common/landing", ["specialities" => $specialities]);
         $html = $this->templator->output( "index", ["landing" => $landing, "navbar"=>$navbar]);

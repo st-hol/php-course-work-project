@@ -81,4 +81,8 @@ class TemplateEngine
     public function showPage($html){
         echo $html;
     }
+
+    public static function popUpMessageViaAlert($message){
+        echo "<script>alert($message);</script>";
+    }
 }

@@ -25,8 +25,7 @@ class CmsController extends Controller
         //check middleware
         if ($this->checkAllMiddleware()) {
 
-            $usersOrm = new User("students");
-            $students = $usersOrm->select()->get();
+            $students = User::getAllUsers();
 
             $html = $this->templator->output("cms/edit_users", ["students" => $students]);
             $this->templator->showPage($html);
@@ -39,17 +38,7 @@ class CmsController extends Controller
 
     public function submitEditUser()
     {
-        //record creation.
-        $user = new User("students");
-        $user->id_student = $_POST['idStudent'];
-        $user->first_name = $_POST['firstName'];
-        $user->last_name = $_POST['lastName'];
-        $user->rating = $_POST['rating'];
-        $user->email = $_POST['email'];
-        $user->password = $_POST['password'];
-        //$id_role = $user->getIdRoleByValue($_POST['role']);
-        $user->id_role = $_POST['idRole'];
-        $user->save($composite_primary = ["id_student" => $_POST['idStudent']]);
+        User::createUser();
 
         //redirecting to reload reg page
         echo "<br><script>alert('success.');</script>";
@@ -61,8 +50,8 @@ class CmsController extends Controller
     {
         //check middleware
         if ($this->checkAllMiddleware()) {
-            $usersOrm = new User("students");
-            $usersOrm->delete()->where("id_student", "=", $id_student_to_delete)->get();
+
+            User::deleteUser($id_student_to_delete);
 
             echo "<br><script>alert('deleted.');</script>";
             $this->editUsers();
@@ -78,8 +67,7 @@ class CmsController extends Controller
     {
         //check middleware
         if ($this->checkAllMiddleware()) {
-            $examOrm = new ExamRegistration("exams");
-            $exams = $examOrm->select()->get();
+            $exams = ExamRegistration::getAllExams();
 
             $html = $this->templator->output("cms/edit_exams", ["exams" => $exams]);
             $this->templator->showPage($html);
@@ -92,11 +80,7 @@ class CmsController extends Controller
 
     public function submitEditExam()
     {
-        //record creation.
-        $exam = new ExamRegistration("exams");
-        $exam->id_subject = $_POST['idSubject'];
-        $exam->name_subject = $_POST['nameSubject'];
-        $exam->save($composite_primary = ["id_subject" => $_POST['idSubject']]);
+        ExamRegistration::createExam();
 
         //redirecting to reload reg page
         echo "<br><script>alert('success.');</script>";
@@ -108,8 +92,7 @@ class CmsController extends Controller
     {
         //check middleware
         if ($this->checkAllMiddleware()) {
-            $examOrm = new ExamRegistration("exams");
-            $examOrm->delete()->where("id_subject", "=", $id_exam_to_delete)->get();
+            ExamRegistration::deleteExam($id_exam_to_delete);
 
             echo "<br><script>alert('deleted.');</script>";
             $this->editExams();
@@ -125,8 +108,7 @@ class CmsController extends Controller
     {
         //check middleware
         if ($this->checkAllMiddleware()) {
-            $specialityOrm = new Speciality("specialities");
-            $specialities = $specialityOrm->select()->get();
+            $specialities = Speciality::getAllSpecialities();
 
             $html = $this->templator->output("cms/edit_specialities", ["specialities" => $specialities]);
             $this->templator->showPage($html);
@@ -139,12 +121,7 @@ class CmsController extends Controller
 
     public function submitEditSpeciality()
     {
-        //record creation.
-        $speciality = new Speciality("specialities");
-        $speciality->id_speciality = $_POST['idSpeciality'];
-        $speciality->name_speciality = $_POST['nameSpeciality'];
-        $speciality->id_university = $_POST['idUniversity'];
-        $speciality->save($composite_primary = ["id_speciality" => $_POST['idSpeciality']]);
+        Speciality::editSpeciality();
 
         //redirecting to reload reg page
         echo "<br><script>alert('success.');</script>";
@@ -156,8 +133,7 @@ class CmsController extends Controller
     {
         //check middleware
         if ($this->checkAllMiddleware()) {
-            $usersOrm = new Speciality("specialities");
-            $usersOrm->delete()->where("id_speciality", "=", $id_speciality_to_delete)->get();
+            Speciality::deleteSpeciality($id_speciality_to_delete);
 
             echo "<br><script>alert('deleted.');</script>";
             $this->editSpecialities();

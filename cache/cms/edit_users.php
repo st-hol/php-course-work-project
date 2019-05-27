@@ -54,6 +54,7 @@
             <div class="panel panel-warning">
                 <div class="panel-heading">Додати або Змінити</div>
                 <div style="background: rgba(350,200, 392, 0.5); color: red;">
+                    <br>
                     Ви можете ввести існуючий ID, якщо хочете ЗМІНИТИ користувача.
                     <br>
                     Ви можете залищити поле ID пустим(або внести новий ID) якщо хочете ДОДАТИ користувача.

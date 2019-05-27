@@ -66,22 +66,11 @@ class AccountController extends Controller
         }
 
 
-        //record creation.
-        $user = new User("students");
-        $user->email = $_POST['email'];
-        $user->password = $_POST['password'];
-
-        $id_role = $user->getIdRoleByValue($_POST['role']);
-        $user->id_role = $id_role;
-
-        $user->first_name = $_POST['firstName'];
-        $user->last_name = $_POST['lastName'];
-
-        $user->save();
-
+        User::registerUser();
 
         //redirecting to reload reg page
-        echo "<br><script>alert('account successfully created.');</script>";
+//        echo "<br><script>alert('account successfully created.');</script>";
+        TemplateEngine::popUpMessageViaAlert('account successfully created.');
         $dir->regMe();
     }
 

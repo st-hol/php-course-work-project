@@ -53,12 +53,8 @@ class AdminController extends Controller
         }
 
 
-        //record creation.
-        $exam_reg = new ExamRegistration("students_has_exams");
-        $exam_reg->id_student = $_POST['idStudent'];
-        $exam_reg->id_subject = $_POST['idSubject'];
-        $exam_reg->exam_score = $_POST['examScore'];
-        $exam_reg->save($composite_primary = ["id_student" => $_POST['idStudent'], "id_subject" => $_POST['idSubject']]);
+        ExamRegistration::rateExam();
+
 
         echo "<br><script>alert('success');</script>";
         $this->makeRate();
