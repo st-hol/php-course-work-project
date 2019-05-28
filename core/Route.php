@@ -9,13 +9,31 @@
 require_once __DIR__ . "/../app/middleware/AuthMiddleware.php";
 
 
+/**
+ * Class Route
+ */
 class Route
 {
+    /**
+     * @var null
+     */
     protected static $instance = null;
+    /**
+     * @var array
+     */
     protected static $routes = [];
+    /**
+     * @var array
+     */
     protected static $routesPost = [];
+    /**
+     * @var array
+     */
     protected static $route = [];
 
+    /**
+     * Route constructor.
+     */
     private function __construct()
     {
     }
@@ -28,6 +46,9 @@ class Route
     {
     }
 
+    /**
+     * @return null|Route
+     */
     public static function getInstance()
     {
         if (self::$instance === null) {
@@ -40,6 +61,10 @@ class Route
 //    public static function add($regexp, $route = []){
 //        self::$routes[$regexp] = $route;
 //    }
+    /**
+     * @param $regexp
+     * @param $stringData_controllerMethod
+     */
     public static function add($regexp, $stringData_controllerMethod)
     {
         $data = explode('@', $stringData_controllerMethod);
@@ -50,6 +75,10 @@ class Route
         self::$routes[$regexp] = $route;
     }
 
+    /**
+     * @param $regexp
+     * @param $stringData_controllerMethod
+     */
     public static function addPost($regexp, $stringData_controllerMethod)
     {
         $data = explode('@', $stringData_controllerMethod);
@@ -60,6 +89,9 @@ class Route
         self::$routesPost[$regexp] = $route;
     }
 
+    /**
+     * @param $url
+     */
     public static function dispatch($url)
     {
         $matcher_response = self::matchRoute($url);
@@ -98,6 +130,10 @@ class Route
     }
 
 
+    /**
+     * @param $url
+     * @return array
+     */
     public static function matchRoute($url)
     {
         $url_is_equal = false;
@@ -193,6 +229,9 @@ class Route
     }
 
 
+    /**
+     * @return mixed
+     */
     public static function getMethod()
     {
         return $_SERVER['REQUEST_METHOD'];

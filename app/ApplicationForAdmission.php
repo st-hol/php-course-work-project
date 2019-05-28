@@ -8,6 +8,9 @@
 
 class ApplicationForAdmission extends ORM
 {
+    /**
+     * @param $user
+     */
     public function registerApplication($user)
     {
         //record creation.
@@ -18,6 +21,10 @@ class ApplicationForAdmission extends ORM
     }
 
 
+    /**
+     * @param $user
+     * @return bool
+     */
     public function isEnrolledStudent($user)
     {
         $app = new ApplicationForAdmission("application_for_admission");

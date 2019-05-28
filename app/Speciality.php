@@ -8,6 +8,9 @@
 
 class Speciality extends ORM
 {
+    /**
+     * @return mixed
+     */
     public function getAllSpecialities()
     {
         $specialitiesOrm = new Speciality("specialities");
@@ -15,6 +18,9 @@ class Speciality extends ORM
         return $specialities;
     }
 
+    /**
+     *
+     */
     public function editSpeciality(){
         //record creation.
         $speciality = new Speciality("specialities");
@@ -24,6 +30,9 @@ class Speciality extends ORM
         $speciality->save($composite_primary = ["id_speciality" => $_POST['idSpeciality']]);
     }
 
+    /**
+     * @param $id_speciality_to_delete
+     */
     public function deleteSpeciality($id_speciality_to_delete){
         $usersOrm = new Speciality("specialities");
         $usersOrm->delete()->where("id_speciality", "=", $id_speciality_to_delete)->get();

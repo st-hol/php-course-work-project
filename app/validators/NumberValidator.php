@@ -9,15 +9,29 @@
 class NumberValidator
 {
 
+    /**
+     * @var string
+     */
     private static $NUMBER_REGEXP = "/^([0-9]+)$/";
+    /**
+     * @var string
+     */
     private static $EXAM_SCORE_REGEXP = "/^([0-9]+)\.?([0-9]*)$/";
 
+    /**
+     * @param $value
+     * @return bool
+     */
     public static function validateNumber($value)
     {
         return $value != null && preg_match(self::$NUMBER_REGEXP, $value) == 1;
     }
 
 
+    /**
+     * @param $value
+     * @return bool
+     */
     public static function validateExamScore($value)
     {
         if ($value < 0 or $value == null) {

@@ -8,9 +8,21 @@
 
 class TemplateEngine
 {
+    /**
+     * @var string
+     */
     public $output_path = "/view/";
+    /**
+     * @var string
+     */
     public $cache_path = "/cache/";
+    /**
+     * @var string
+     */
     public $blade_extension = "._blade";
+    /**
+     * @var string
+     */
     public $php_extension = ".php";
 
     /**
@@ -78,10 +90,16 @@ class TemplateEngine
         file_put_contents($filename, $php);
     }
 
+    /**
+     * @param $html
+     */
     public function showPage($html){
         echo $html;
     }
 
+    /**
+     * @param $message
+     */
     public static function popUpMessageViaAlert($message){
         echo "<script>alert($message);</script>";
     }

@@ -9,6 +9,9 @@
 class User extends ORM
 {
 
+    /**
+     * @return mixed
+     */
     public function getAllUsers(){
         $usersOrm = new User("students");
         $students = $usersOrm->select()->get();
@@ -16,6 +19,9 @@ class User extends ORM
     }
 
 
+    /**
+     *
+     */
     public function createUser(){
         //record creation.
         $user = new User("students");
@@ -29,12 +35,19 @@ class User extends ORM
         $user->save($composite_primary = ["id_student" => $_POST['idStudent']]);
     }
 
+    /**
+     * @param $id_student_to_delete
+     */
     public function deleteUser($id_student_to_delete){
         $usersOrm = new User("students");
         $usersOrm->delete()->where("id_student", "=", $id_student_to_delete)->get();
     }
 
 
+    /**
+     * @param $role_value
+     * @return int
+     */
     public static function getIdRoleByValue($role_value){
         if($role_value == "ADMIN"){
             return 1;
@@ -48,7 +61,9 @@ class User extends ORM
     }
 
 
-
+    /**
+     *
+     */
     public function registerUser(){
 
         //record creation.
@@ -66,7 +81,9 @@ class User extends ORM
     }
 
 
-
+    /**
+     * @return mixed
+     */
     public function getEnrolled(){
         //emulating join :)
         $usersOrm = new User("students S, application_for_admission A");
@@ -78,6 +95,10 @@ class User extends ORM
     }
 
 
+    /**
+     * @param $role_id
+     * @return string
+     */
     public static function getRoleValueById($role_id){
         if($role_id == 1){
             return "ADMIN";
@@ -90,6 +111,11 @@ class User extends ORM
         }
     }
 
+    /**
+     * @param $email
+     * @param string $table
+     * @return bool
+     */
     public static function emailAlreadyTaken($email, $table = ""){
         $userOrm = new self($table);
         $res = $userOrm->select()->where("email", "=", "'$email'")->get();

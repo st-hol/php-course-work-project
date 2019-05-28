@@ -9,6 +9,10 @@
 class EmailSender
 {
 
+    /**
+     * @param $enrolled
+     * @param $user_email
+     */
     public function notifyStudentByEmail($enrolled, $user_email)
     {
         $message = "<h3> Результат подачі заяви на вступ" . "</h3>";

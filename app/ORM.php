@@ -8,10 +8,22 @@
 
 require_once __DIR__ . "/../core/db/SQL.php";
 
+/**
+ * Class ORM
+ */
 class ORM
 {
+    /**
+     * @var string
+     */
     protected $table;
+    /**
+     * @var SQL
+     */
     protected $builder;
+    /**
+     * @var
+     */
     protected $attributes;
 
     /**
@@ -30,12 +42,22 @@ class ORM
     }
 
 
+    /**
+     * @param $name
+     * @param $arguments
+     * @return mixed
+     */
     public function __call($name, $arguments)
     {
         $builder = $this->getBuilder();
         return call_user_func_array([$builder, $name], $arguments);
     }
 
+    /**
+     * @param $name
+     * @param $arguments
+     * @return mixed
+     */
     public static function __callStatic($name, $arguments)
     {
         $instance = new static(); //static - child. self - parent
@@ -45,12 +67,22 @@ class ORM
 
 
     //st->name
+
+    /**
+     * @param $name
+     * @return mixed
+     */
     public function __get($name)
     {
         return $this->attributes[$name];
     }
 
     //st->name
+
+    /**
+     * @param $name
+     * @param $value
+     */
     public function __set($name, $value)
     {
         $this->attributes[$name] = $value;
@@ -64,6 +96,9 @@ class ORM
         return $this->builder;
     }
 
+    /**
+     * @return SQL
+     */
     public function newBuilder(): SQL
     {
         $builder = SQL::table($this->table);
@@ -72,6 +107,10 @@ class ORM
     }
 
 
+    /**
+     * @param $result_row
+     * @return ORM
+     */
     public static function extract_from_result_array($result_row)
     {
         $obj = new static();
@@ -84,6 +123,9 @@ class ORM
         return $obj;
     }
 
+    /**
+     * @param array $composite_primary
+     */
     public function save($composite_primary = [])
     {
         if ($composite_primary == []) {
@@ -111,6 +153,11 @@ class ORM
      */
 
     //todo rework $existing in find
+    /**
+     * @param $table
+     * @param $primary_keys
+     * @return bool
+     */
     public function is_already_existing_record($table, $primary_keys)
     {
 
@@ -153,7 +200,10 @@ class ORM
 }
 
 
-spl_autoload_register(function ($class) {
+spl_autoload_register(/**
+ * @param $class
+ */
+    function ($class) {
     $file = "$class.php";
     if (is_file($file)) {
         require_once $file;

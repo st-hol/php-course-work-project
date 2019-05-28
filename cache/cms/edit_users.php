@@ -121,7 +121,7 @@
                         </fieldset>
                         <div class="form-group">
                             <div class="col-md-12">
-                                <button type="submit" class="btn btn-warning" id="addtotable">Додати запис до таблиці
+                                <button type="submit" class="btn btn-warning" id="addtotable">ОК
                                 </button>
                             </div>
                         </div>

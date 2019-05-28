@@ -9,18 +9,55 @@
 require "DBHandler.php";
 
 
+/**
+ * Class SQL
+ */
 class SQL
 {
     //private $me = NULL;
+    /**
+     * @var
+     */
     private $model_class_name;
 
+    /**
+     * @var
+     */
     private $select;
+    /**
+     * @var
+     */
     private $delete;
+    /**
+     * @var
+     */
     private $from;
+    /**
+     * @var
+     */
     private $order_by;
+    /**
+     * @var
+     */
+    /**
+     * @var
+     */
+    /**
+     * @var
+     */
+    /**
+     * @var
+     */
     private $where_col, $where_op, $where_val, $where_assoc;
+    /**
+     * @var
+     */
     private $limit;
 
+    /**
+     * @param $from_options
+     * @return SQL
+     */
     public function table($from_options)
     {
         $me = new SQL();
@@ -31,6 +68,11 @@ class SQL
     }
 
     // '*' by default
+
+    /**
+     * @param string $select_options
+     * @return $this
+     */
     public function select($select_options = "*")
     {
         $query_part = " SELECT " . $select_options;
@@ -38,6 +80,13 @@ class SQL
         return $this;
     }
 
+    /**
+     * @param $column
+     * @param $operator
+     * @param $value
+     * @param string $association
+     * @return $this
+     */
     public function where($column, $operator, $value, $association = ' ')
     {
         $this->where_col[] = $column;
@@ -48,6 +97,11 @@ class SQL
         return $this;
     }
 
+    /**
+     * @param $order_options
+     * @param string $order_type
+     * @return $this
+     */
     public function order_by($order_options, $order_type = 'ASC')
     {
         $query_part = " ORDER BY " . $order_options . " " . $order_type;
@@ -56,6 +110,12 @@ class SQL
     }
 
     // '200' by default
+
+    /**
+     * @param string $limit_start_options
+     * @param string $limit_end_options
+     * @return $this
+     */
     public function limit($limit_start_options = "0", $limit_end_options = "200")
     {
         $query_part = " LIMIT " . $limit_start_options . ", " . $limit_end_options;
@@ -93,6 +153,10 @@ class SQL
         return $sql_query;
     }
 
+    /**
+     * @param $sql_query
+     * @return mixed
+     */
     public function exct($sql_query)
     {
         $dsn = DBHandler::assemble_DSN('127.0.0.1', 'introductory_campaign', 'utf8'); //Data_source_name
@@ -115,6 +179,10 @@ class SQL
     }
 
 
+    /**
+     * @param $result
+     * @return array
+     */
     public function formatResult($result)
     {
         $results_mapped_array = [];
@@ -130,6 +198,9 @@ class SQL
         }
     }
 
+    /**
+     * @return $this
+     */
     public function delete()
     {
         $this->delete = " delete ";
@@ -150,12 +221,21 @@ class SQL
         return $this->formatResult($res);
     }
 
+    /**
+     * @return mixed
+     */
     public function first()
     {
         return $this->get()[0];
     }
 
 
+    /**
+     * @param $column
+     * @param $operator
+     * @param $value
+     * @return array
+     */
     public function find($column, $operator, $value)
     {
         $this->select = " SELECT * ";
@@ -170,6 +250,11 @@ class SQL
         return $this->formatResult($res);
     }
 
+    /**
+     * @param $table
+     * @param $attributes
+     * @param $composite_primary
+     */
     public function update($table, $attributes, $composite_primary)
     {
         $sql_query = " UPDATE " . $table . " SET ";
@@ -196,6 +281,10 @@ class SQL
     }
 
 
+    /**
+     * @param $table
+     * @param $attributes
+     */
     public function insert($table, $attributes)
     {
         $insert_field_names = [];

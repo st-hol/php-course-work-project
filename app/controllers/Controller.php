@@ -9,9 +9,18 @@
 require_once __DIR__ . "/../../core/TemplateEngine.php";
 
 
+/**
+ * Class Controller
+ */
 class Controller
 {
+    /**
+     * @var TemplateEngine
+     */
     protected $templator;
+    /**
+     * @var array
+     */
     protected $middleware = [];
 
     /**
@@ -34,6 +43,9 @@ class Controller
     }
 
 
+    /**
+     * @return bool
+     */
     public function checkAllMiddleware(){
         $can_continue = false;
         if ( ! empty($this->middleware)) {
@@ -51,10 +63,19 @@ class Controller
         return $can_continue;
     }
 
+    /**
+     * @param $method
+     * @param array $parameters
+     * @return mixed
+     */
     public function callAction($method, $parameters=[]){
         return call_user_func_array(array($this, $method), $parameters);
     }
 
+    /**
+     * @param $method
+     * @param array $parameters
+     */
     public  function __call($method, $parameters=[])
     {
         print ("<br>Controller: Method [{$method}] does not exist");
@@ -63,6 +84,9 @@ class Controller
 
 
     //utility
+    /**
+     * @return array
+     */
     public function getIncludesByRole(){
         session_start();
         $role = $_SESSION['user-role'];

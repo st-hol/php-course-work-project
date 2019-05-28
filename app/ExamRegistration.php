@@ -8,6 +8,9 @@
 
 class ExamRegistration extends ORM
 {
+    /**
+     *
+     */
     public function rateExam()
     {
         //record update.
@@ -18,6 +21,9 @@ class ExamRegistration extends ORM
         $exam_reg->save($composite_primary = ["id_student" => $_POST['idStudent'], "id_subject" => $_POST['idSubject']]);
     }
 
+    /**
+     *
+     */
     public function createExam(){
         //record creation.
         $exam = new ExamRegistration("exams");
@@ -26,11 +32,17 @@ class ExamRegistration extends ORM
         $exam->save($composite_primary = ["id_subject" => $_POST['idSubject']]);
     }
 
+    /**
+     * @param $id_exam_to_delete
+     */
     public function deleteExam($id_exam_to_delete){
         $examOrm = new ExamRegistration("exams");
         $examOrm->delete()->where("id_subject", "=", $id_exam_to_delete)->get();
     }
 
+    /**
+     * @param $user
+     */
     public function registerForExam($user){
         //record creation.
         $exam_reg = new ExamRegistration("students_has_exams");
@@ -39,6 +51,9 @@ class ExamRegistration extends ORM
         $exam_reg->save();
     }
 
+    /**
+     * @return mixed
+     */
     public function getAllExams()
     {
         $examsOrm = new ExamRegistration("exams");
@@ -47,6 +62,9 @@ class ExamRegistration extends ORM
     }
 
 
+    /**
+     * @return mixed
+     */
     public function getAllExamsQuantity()
     {
         $examOrm = new ExamRegistration("exams");
@@ -54,6 +72,10 @@ class ExamRegistration extends ORM
         return $all_exams_quantity;
     }
 
+    /**
+     * @param $user
+     * @return mixed
+     */
     public function getStudentPassedExamsQuantity($user)
     {
         $examOrm = new ExamRegistration("students_has_exams");

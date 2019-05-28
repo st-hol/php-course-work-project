@@ -9,7 +9,10 @@
 
 //importing all model classes
 define("APP", __DIR__ . "/..");
-spl_autoload_register(function ($class) {
+spl_autoload_register(/**
+ * @param $class
+ */
+    function ($class) {
     $file = APP . "/$class.php";
     if (is_file($file)) {
         require_once $file;
@@ -17,12 +20,21 @@ spl_autoload_register(function ($class) {
 });
 
 
+/**
+ * Class Middleware
+ */
 class Middleware
 {
+    /**
+     * @return bool
+     */
     public function handle(){
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function run(){
         return true;
     }

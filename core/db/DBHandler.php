@@ -9,13 +9,33 @@
 class DBHandler
 {
 
+    /**
+     * @var
+     */
     protected static $dbh;
 
+    /**
+     * DBHandler constructor.
+     */
     private function __construct() {}
+
+    /**
+     *
+     */
     private function __clone() {}
+
+    /**
+     *
+     */
     private function __wakeup() {}
 
 
+    /**
+     * @param $dsn
+     * @param $user
+     * @param $pass
+     * @return PDO
+     */
     public static function getInstance($dsn, $user, $pass)
     {
         if (self::$dbh === null) {

@@ -12,9 +12,15 @@ require_once __DIR__ . "/../middleware/AuthMiddleware.php";
 
 require_once __DIR__ . "/../validators/UserValidator.php";
 
+/**
+ * Class AccountController
+ */
 class AccountController extends Controller
 {
 
+    /**
+     * @var array
+     */
     protected $middleware = ["AuthMiddleware"];
 
     public function login()
@@ -34,6 +40,9 @@ class AccountController extends Controller
     }
 
 
+    /**
+     *
+     */
     public function logout()
     {
 
@@ -45,6 +54,7 @@ class AccountController extends Controller
         $dir = new CommonController();
         $dir->home();
     }
+
 
 
     public function register()

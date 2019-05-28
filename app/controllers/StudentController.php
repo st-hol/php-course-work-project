@@ -23,7 +23,6 @@ class StudentController extends Controller
         $sidebar = $bars[0];
         $navbar = $bars[1];
 
-
         $students = User::getEnrolled();
 
         $html = $this->templator->output("user/enrolledlist", ["students" => $students, "sidebar" => $sidebar, "navbar" => $navbar]);
