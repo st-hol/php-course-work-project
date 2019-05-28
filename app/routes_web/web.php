@@ -42,7 +42,6 @@ Route::add('403', "ErrorController@error403forbidden");
 Route::add('404', "ErrorController@error404notfound");
 
 
-
 //cms
 //user-edit
 Route::add("edit-users", 'CmsController@editUsers');

@@ -15,33 +15,37 @@ require_once __DIR__ . "/../middleware/StudentRightsMiddleware.php";
 
 class StudentController extends Controller
 {
-    protected $middleware = ["StudentRightsMiddleware"];
+    protected $middleware = ["StudentRightsMiddleware", "LocaleMiddleware"];
 
     public function showAllEnrolled()
     {
-        $bars = $this->getIncludesByRole();
+        $lang = $this->localeMiddleware();
+
+        $bars = $this->getIncludesByRole($lang);
         $sidebar = $bars[0];
         $navbar = $bars[1];
 
         $students = User::getEnrolled();
 
-        $html = $this->templator->output("user/enrolledlist", ["students" => $students, "sidebar" => $sidebar, "navbar" => $navbar]);
+        $html = $this->templator->output($lang."/user/enrolledlist", ["students" => $students, "sidebar" => $sidebar, "navbar" => $navbar]);
         $this->templator->showPage($html);
     }
 
     public function makeApplyForAdmission()
     {
+        $lang = $this->localeMiddleware();
+
         //check middleware
         if ($this->checkAllMiddleware()) {
 
-            $bars = $this->getIncludesByRole();
+            $bars = $this->getIncludesByRole($lang);
             $sidebar = $bars[0];
             $navbar = $bars[1];
 
             $specialitiesOrm = new Speciality("specialities");
             $specialities = $specialitiesOrm->select()->get();
 
-            $html = $this->templator->output("user/applyforadmission", ["specialities" => $specialities, "sidebar" => $sidebar, "navbar" => $navbar]);
+            $html = $this->templator->output($lang."/user/applyforadmission", ["specialities" => $specialities, "sidebar" => $sidebar, "navbar" => $navbar]);
             $this->templator->showPage($html);
         } else {
             $dir = new ErrorController();
@@ -76,15 +80,17 @@ class StudentController extends Controller
 
     public function makeRegForExam()
     {
+        $lang = $this->localeMiddleware();
+
         //check middleware
         if ($this->checkAllMiddleware()) {
-            $bars = $this->getIncludesByRole();
+            $bars = $this->getIncludesByRole($lang);
             $sidebar = $bars[0];
             $navbar = $bars[1];
 
             $exams = ExamRegistration::getAllExams();
 
-            $html = $this->templator->output("user/regforexam", ["exams" => $exams, "sidebar" => $sidebar, "navbar" => $navbar]);
+            $html = $this->templator->output($lang."/user/regforexam", ["exams" => $exams, "sidebar" => $sidebar, "navbar" => $navbar]);
             $this->templator->showPage($html);
         } else {
             $dir = new ErrorController();

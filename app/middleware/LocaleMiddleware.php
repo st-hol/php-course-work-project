@@ -7,20 +7,16 @@
  */
 
 require_once "Middleware.php";
-require_once __DIR__ . "/../../core/utility/util_functions.php";
 
-class StudentRightsMiddleware extends Middleware
+class LocaleMiddleware extends Middleware
 {
-
     public function handle()
     {
         session_start();
-        $cur_role = $_SESSION['user-role'];
-
-        if ($cur_role == "STUDENT"){
-            return true;
+        if (isset($_GET['lang'])) {
+            $_SESSION['lang'] = $_GET['lang'];
         }
-        return false;
+        return isset($_SESSION['lang']) ? $_SESSION['lang'] : "ua";
     }
 
     public function run()
@@ -29,4 +25,6 @@ class StudentRightsMiddleware extends Middleware
     }
 
 }
+
+
 

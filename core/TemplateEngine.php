@@ -68,8 +68,8 @@ class TemplateEngine
      */
     public function parse_blade($blade_code)
     {
-        $php = str_replace("{{", " <?php ", $blade_code);
-        $php = str_replace("}}", " ?> ", $php);
+        $php = str_replace("{{", "<?php ", $blade_code);
+        $php = str_replace("}}", " ?>", $php);
         $php = str_replace(">>>", " echo ", $php);
         $php = str_replace("<<<", " require_once ", $php);
         $php = str_replace("[[", " foreach ", $php);

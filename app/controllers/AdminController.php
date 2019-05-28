@@ -16,14 +16,16 @@ require_once __DIR__ . "/../validators/NumberValidator.php";
 class AdminController extends Controller
 {
 
-    protected $middleware = ["AdminRightsMiddleware"];
+    protected $middleware = ["AdminRightsMiddleware", "LocaleMiddleware"];
 
     public function makeRate()
     {
+        $lang = $this->localeMiddleware();
+
         //check middleware
         if ($this->checkAllMiddleware()) {
 
-            $bars = $this->getIncludesByRole();
+            $bars = $this->getIncludesByRole($lang);
             $sidebar = $bars[0];
             $navbar = $bars[1];
 
@@ -33,7 +35,7 @@ class AdminController extends Controller
             $examsOrm = new ExamRegistration("exams");
             $exams = $examsOrm->select()->get();
 
-            $html = $this->templator->output( "admin/putmarks", ["students"=>$students, "exams"=>$exams, "sidebar"=>$sidebar, "navbar"=>$navbar]);
+            $html = $this->templator->output( $lang."/admin/putmarks", ["students"=>$students, "exams"=>$exams, "sidebar"=>$sidebar, "navbar"=>$navbar]);
             $this->templator->showPage($html);
         } else {
             $dir = new ErrorController();

@@ -38,9 +38,9 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="edit-users">Users</a></li>
-                <li><a href="edit-exams">Exams</a></li>
-                <li><a href="edit-specialities">Specialities</a></li>
+                <li><a href="editUsers">Users</a></li>
+                <li><a href="editExams">Exams</a></li>
+                <li><a href="editSpecialities">Specialities</a></li>
             </ul>
         </div>
     </div>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="panel-body">
 
-                    <form method="post" class="form-horizontal" action="submit-edit-speciality">
+                    <form method="post" class="form-horizontal" action="../../index.php">
                         <input  style="display: none" name="direction" value="submit-edit-speciality">
                         <fieldset id="fieldList">
                             <div class="form-group col-md-4 col-sm-6 col-xs-12">

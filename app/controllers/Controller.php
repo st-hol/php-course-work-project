@@ -7,7 +7,7 @@
  */
 
 require_once __DIR__ . "/../../core/TemplateEngine.php";
-
+require_once __DIR__ . "/../middleware/LocaleMiddleware.php";
 
 /**
  * Class Controller
@@ -46,13 +46,14 @@ class Controller
     /**
      * @return bool
      */
-    public function checkAllMiddleware(){
+    public function checkAllMiddleware()
+    {
         $can_continue = false;
-        if ( ! empty($this->middleware)) {
+        if (!empty($this->middleware)) {
             foreach ($this->middleware as $middleware_class_name) {
                 $mdw = new $middleware_class_name;
                 //echo "<br><i>trying to process middleware</i>";
-                if ($mdw->handle()){
+                if ($mdw->handle()) {
                     $can_continue = true;
                 } else {
                     $can_continue = false;
@@ -63,12 +64,25 @@ class Controller
         return $can_continue;
     }
 
+    public function localeMiddleware()
+    {
+        if (in_array("LocaleMiddleware", $this->middleware)) {
+            $mdw = new LocaleMiddleware();
+            $lang = $mdw->handle();
+            return $lang;
+        }
+        else {
+            return "ua"; //by default
+        }
+    }
+
     /**
      * @param $method
      * @param array $parameters
      * @return mixed
      */
-    public function callAction($method, $parameters=[]){
+    public function callAction($method, $parameters = [])
+    {
         return call_user_func_array(array($this, $method), $parameters);
     }
 
@@ -76,7 +90,7 @@ class Controller
      * @param $method
      * @param array $parameters
      */
-    public  function __call($method, $parameters=[])
+    public function __call($method, $parameters = [])
     {
         print ("<br>Controller: Method [{$method}] does not exist");
     }
@@ -84,22 +98,26 @@ class Controller
 
 
     //utility
+
     /**
      * @return array
      */
-    public function getIncludesByRole(){
+    public function getIncludesByRole($lang)
+    {
+       // $lang = $this->localeMiddleware();
+
         session_start();
         $role = $_SESSION['user-role'];
 
-        if ($role == "ADMIN"){
-            $sidebar = $this->templator->output( "admin/sidebar", []);
-            $navbar = $this->templator->output( "admin/navbar", []);
-        }elseif ($role == "STUDENT"){
-            $sidebar = $this->templator->output( "user/sidebar", []);
-            $navbar = $this->templator->output( "user/navbar", []);
-        }else{
-            $sidebar = $this->templator->output( "guest/sidebar", []);
-            $navbar = $this->templator->output( "guest/navbar", []);
+        if ($role == "ADMIN") {
+            $sidebar = $this->templator->output($lang."/admin/sidebar", []);
+            $navbar = $this->templator->output($lang."/admin/navbar", []);
+        } elseif ($role == "STUDENT") {
+            $sidebar = $this->templator->output($lang."/user/sidebar", []);
+            $navbar = $this->templator->output($lang."/user/navbar", []);
+        } else {
+            $sidebar = $this->templator->output($lang."/guest/sidebar", []);
+            $navbar = $this->templator->output($lang."/guest/navbar", []);
         }
 
         return [$sidebar, $navbar];
