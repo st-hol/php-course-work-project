@@ -10,9 +10,12 @@
       Formed rating lists of applicants, students receive a notice of admission.
       
   
-  b) Technologies used:
-  
-      In this course work was implemented my own simple mvc framework, ORM, template-preprocessor and middleware. 
+  b) Features implemented:
+ 
+      my own simple mvc framework, 
+      ORM, 
+      template-preprocessor,
+      middleware,
       SQL Triggers was used to provide interanal "system" logic.
       
 
